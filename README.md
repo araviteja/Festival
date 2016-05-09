@@ -1,2 +1,0 @@
-# Festival
-Festival_registration
