@@ -1,96 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="Sample_project" default="war" basedir=".">
-	<property file="build.properties" />
-	
-	<property name="war-file-name" value="${project-name}.war" />
-	<property name="source-directory" value="src" />
-	<property name="classes-directory" value="bin" />
-	<property name="web-directory" value="web" />
-	<property name="web-xml-file" value="web/WEB-INF/web.xml" />
-	<tstamp prefix="build-info">
-		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
-		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
-		<format property="year-month-day" pattern="yyyy-MM-dd" locale="en" />
-	</tstamp>
-	<property name="build-directory" value="build" />
-
-	<property name="ftp-remotedir" value="uploaded-wars/${project-name}/${build-info.year-month-day}" />
-
-	<taskdef name="start" classname="org.apache.catalina.ant.StartTask" />
-	<taskdef name="stop" classname="org.apache.catalina.ant.StopTask" />
-	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
-	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
-
-	<target name="stop" description="stop application in tomcat">
-		<stop url="${tomcat-manager-url}" username="${tomcat-manager-username}"
-			password="${tomcat-manager-password}" path="/${project-name}" />
-	</target>
-
-	<target name="start" description="start application in tomcat">
-		<start url="${tomcat-manager-url}" username="${tomcat-manager-username}"
-			password="${tomcat-manager-password}" path="/${project-name}" />
-	</target>
-	
-	<target name="undeploy" description="undeploy from tomcat">
-		<undeploy 
-			failonerror="no"
-			url="${tomcat-manager-url}"
-			username="${tomcat-manager-username}"
-			password="${tomcat-manager-password}"
-			path="/${project-name}"
-		/>
-	</target>
-	
-	<target name="deploy" description="deploy to tomcat">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="Sample_project">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../Downloads/Downloads/Eclipse 2.app/Contents/Eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="Web App Libraries.libraryclasspath"/>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath">
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/annotations-api.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/catalina-ant.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/catalina-ha.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/catalina-tribes.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/catalina.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/ecj-4.4.2.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/el-api.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/jasper-el.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/jasper.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/jsp-api.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/servlet-api.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-api.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-coyote.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-dbcp.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-jdbc.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat-util.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/tomcat7-websocket.jar"/>
+        <pathelement location="../../Desktop/apache-tomcat-7.0.68/lib/websocket-api.jar"/>
+    </path>
+    <path id="Sample_project.classpath">
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+        <path refid="Apache Tomcat v7.0 [Apache Tomcat v7.0].libraryclasspath"/>
+    </path>
+    <target name="init"/>
+    <target name="clean"/>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="deploy" description="deploy to tomcat">
 		<echo>deploying from client</echo>
 		<deploy 
-			url="${tomcat-manager-url}"
-			username="${tomcat-manager-username}"
-			password="${tomcat-manager-password}"
+			url="http://localhost:8085"
+			username="tomcat"
+			password="tomcat"
 			path="/${project-name}"
 			war="file:/projects/workspace/${project-name}/${build-directory}/${war-file-name}"
 		/>
 	</target>
-	
-	<target name="war" depends="">
-		<mkdir dir="${build-directory}" />
-		<delete file="${build-directory}/${war-file-name}" />
-		<war warfile="${build-directory}/${war-file-name}" webxml="${web-xml-file}">
-			<classes dir="${classes-directory}" />
-			<fileset dir="${web-directory}">
-				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
-				<exclude name="WEB-INF/web.xml" />
-			</fileset>
-			<manifest>
-				<attribute name="Built-By" value="${builder}" />
-				<attribute name="Built-On" value="${build-info.current-date}" />
-				<attribute name="Built-At" value="${build-info.current-time}" />
-			</manifest>
-		</war>
-	</target>
-
-	<target name="ftp" depends="" description="upload war file to server">
-		<ftp 
-			server="${ftp-server}" remotedir="${ftp-remotedir}"
-			userid="${ftp-userid}" password="${ftp-password}"
-			action="mkdir" verbose="yes">
-		</ftp>
-		<ftp 
-			server="${ftp-server}" remotedir="${ftp-remotedir}"
-			userid="${ftp-userid}" password="${ftp-password}"
-			action="send" verbose="yes" depends="yes">
-			<fileset file="${build-directory}/${war-file-name}" />
-		</ftp>
-	</target>
-
-	<target name="mail-upload-complete">
-		<mail from="ant@cakelycakes.com"
-		      tolist="bigcakes@cakelycakes.com"
-		      subject="${war-file-name} was uploaded to the server"
-		      message="The ${war-file-name} file was uploaded to ${ftp-server} in ${ftp-remotedir}"/>
-	</target>
-
-	<target name="build-and-ftp" depends="war,ftp,mail-upload-complete" />
-	<target name="build-and-deploy" depends="war,undeploy,deploy" />
-	
 </project>
