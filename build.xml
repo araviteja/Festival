@@ -64,7 +64,7 @@
     <target name="deploy" description="deploy to tomcat">
 		<echo>deploying from client</echo>
 		<deploy 
-			url="http://localhost:8085"
+			url="http://localhost:8085/"
 			username="tomcat"
 			password="tomcat"
 			path="/${project-name}"
