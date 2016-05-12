@@ -66,10 +66,10 @@
 		<echo>deploying from client</echo>
 		<deploy 
 			url="http://localhost:8085/"
-			username="tomcat"
-			password="tomcat"
+			username="deployer"
+			password="deployer"
 			path="Sample_project"
-			war="/usr/local/Cellar/tomcat/8.0.32/libexec/webapps/sample.war"
+			war="sample.war"
 		/>
 	</target>
 </project>
